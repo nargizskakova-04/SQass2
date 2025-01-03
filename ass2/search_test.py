@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,10 +15,10 @@ def wildberries_search():
         
         driver.find_element(By.ID, "applySearchBtn").click()
         
-        results = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "product-card")))
+        results = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.product-card__wrapper")))       
         assert results.is_displayed()
         print("Search successful!")
-        
+        time.sleep(2)
     finally:
         driver.quit()
 
