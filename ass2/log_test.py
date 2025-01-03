@@ -6,15 +6,12 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 def test_login_logout():
-    # Initialize the Chrome driver
     driver = webdriver.Chrome()
     driver.maximize_window()
     
     try:
-        # Navigate to the website
         driver.get("https://www.saucedemo.com")
         
-        # Login
         username = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "user-name"))
         )
@@ -23,17 +20,14 @@ def test_login_logout():
         username.send_keys("standard_user")
         password.send_keys("secret_sauce")
         
-        # Click login button
         login_button = driver.find_element(By.ID, "login-button")
         login_button.click()
         
-        # Verify successful login
         products_title = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "title"))
         )
         assert products_title.text == "Products", "Login failed"
         
-        # Logout
         menu_button = driver.find_element(By.ID, "react-burger-menu-btn")
         menu_button.click()
         
@@ -42,7 +36,6 @@ def test_login_logout():
         )
         logout_link.click()
         
-        # Verify logout
         login_button = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "login-button"))
         )
